@@ -1,5 +1,5 @@
 {
-  "name": "@ngss/graphs",
+  "name": "ngss-graphs",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^11.2.13",
@@ -7,5 +7,23 @@
   },
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "description": "This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.13.",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hasankapan/graphs.git"
+  },
+  "keywords": [
+    "hasan"
+  ],
+  "author": "Hasan Kapan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hasankapan/graphs/issues"
+  },
+  "homepage": "https://github.com/hasankapan/graphs#readme"
 }
