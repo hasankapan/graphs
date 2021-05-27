@@ -1,9 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NameValue } from '../../models/inputs/data/core/NameValue.model';
 import { Chart } from 'chart.js';
-import { PieGraphConfig } from '../../models/inputs/config/PieGraphConfig.model';
 import { Messages } from '../../Ngss.message';
 import { StatusMessage } from '../../models/calls/StatusMessage.model';
+import { NameValue } from '../../interfaces/data/NameValue.model';
+import { PieGraphConfig } from '../../interfaces/config/PieGraphConfig.model';
+import { PieGraphConfigImpl } from '../../models/inputs/config/PieGraphConfigImpl.model';
+import { merge } from 'lodash';
 
 @Component({
   selector: 'ngss-pie-graph',
@@ -33,8 +35,12 @@ export class PieGraphComponent implements OnInit {
   }
 
   prepare(data: NameValue[], config: PieGraphConfig) {
+    console.log(config);
+
     /* first, default settings are created, then they are combined with the values that come as parameters. */
-    let mergedConfig: PieGraphConfig = Object.assign(new PieGraphConfig(), config);
+    let mergedConfig: PieGraphConfig = merge(new PieGraphConfigImpl(), config)
+    console.log(mergedConfig);
+
     (data == null) ? this.clearCanvasFillText(Messages.NO_DATA) : this.createPieChart(data, mergedConfig);
   }
 
@@ -109,18 +115,16 @@ export class PieGraphComponent implements OnInit {
         onClick: function myfc(c, i) {
           try {
             let e = i[0];
-            console.log(e);
-            
             var _value = e._model.label
             that.selectedContextEmitter(_value);
-            //add label value
           }
-          catch{
+          catch {
+            
           }
         }
       }
     });
-    
+
     this.prepareData(data).then((res: StatusMessage) => {
       if (res.status) {
         this.chart.update();
@@ -135,8 +139,8 @@ export class PieGraphComponent implements OnInit {
     return new Promise<StatusMessage>((resolve, reject) => {
       try {
         for (let i = 0; i < data.length; i++) {
-          this.chart.data.datasets[0].data[i] = Math.floor(data[i].getValue());
-          this.chart.data.labels[i] = data[i].getName();
+          this.chart.data.datasets[0].data[i] = Math.floor(data[i].value);
+          this.chart.data.labels[i] = data[i].name;
         }
         resolve(new StatusMessage(true, "data filled successfully"));
       } catch (err) {

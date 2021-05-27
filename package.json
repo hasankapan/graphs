@@ -1,10 +1,11 @@
 {
   "name": "ngss-graphs",
-  "version": "0.0.9",
+  "version": "0.1.2",
   "peerDependencies": {
     "@angular/common": "^11.2.13",
     "@angular/core": "^11.2.13",
-    "chart.js": "^2.9.4"
+    "chart.js": "^2.9.4",
+    "lodash": "^4.17.21"
   },
   "dependencies": {
     "tslib": "^2.0.0"
@@ -19,12 +20,16 @@
     "url": "git+https://github.com/hasankapan/graphs.git"
   },
   "keywords": [
-    "hasan"
+    "graphs",
+    "charts",
+    "ngss",
+    "ngss-graphs"
   ],
   "author": "Hasan Kapan",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hasankapan/graphs/issues"
   },
-  "homepage": "https://github.com/hasankapan/graphs#readme"
+  "homepage": "https://github.com/hasankapan/graphs#readme",
+  "devDependencies": {}
 }

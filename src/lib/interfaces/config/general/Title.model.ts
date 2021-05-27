@@ -1,23 +1,23 @@
-import { FontStyle } from "../../enum/FontStyle.enum";
-import { Position } from "../../enum/Position.enum";
+import { FontStyle } from "../../../models/inputs/enum/FontStyle.enum";
+import { Position } from "../../../models/inputs/enum/Position.enum";
 
-export class Title {
+export interface Title {
     /* @param display - the title shown. */
-    display: boolean = true;
+    display: boolean;
     /* @param display - Possible title positions. */
-    position: Position = Position.TOP;
+    position: Position;
     /* @param fontSize - size of font. */
-    fontSize: number = 13;
+    fontSize: number;
     /* @param fontFamily - Font family for the title text. */
-    fontFamily: string = 'system-ui';
+    fontFamily: string;
     /* @param fontColor - color of font */
-    fontColor: string = '#666';
+    fontColor: string;
     /* @param fontStyle - style of font */
-    fontStyle: FontStyle = FontStyle.NORMAL;
+    fontStyle: FontStyle;
     /* @param padding - Number of pixels to add above and below the title text. */
-    padding: number = 8;
+    padding: number;
     /* @param lineHeight - Height of an individual line of text. */
-    lineHeight: number = 1.2
+    lineHeight: number;
     /* @param text - Title text to display. If specified as an array, text is rendered on multiple lines. */
-    text: string | string[] = 'Custom Title';
+    text: string | string[];
 }

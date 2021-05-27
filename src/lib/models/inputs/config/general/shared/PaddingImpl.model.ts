@@ -1,4 +1,6 @@
-export class Padding {
+import { Padding } from "../../../../../interfaces/config/general/shared/Padding.model";
+
+export class PaddingImpl implements Padding{
     left: number = 0;
     right: number = 0;
     top: number = 0;

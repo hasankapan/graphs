@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { GraphsComponent } from './graphs.component';
 import { PieGraphComponent } from './components/pie-graph/pie-graph.component';
 import { CommonModule } from '@angular/common'; 
+import { GraphService } from './services/graph.service';
 
 
 @NgModule({
@@ -10,11 +11,14 @@ import { CommonModule } from '@angular/common';
     PieGraphComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     GraphsComponent,
-    PieGraphComponent
+    PieGraphComponent,
+  ],
+  providers: [
+    GraphService
   ]
 })
 export class GraphsModule { }

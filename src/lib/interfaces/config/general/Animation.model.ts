@@ -1,12 +1,12 @@
-import { Easing } from "../../enum/Easing.enum";
+import { Easing } from "../../../models/inputs/enum/Easing.enum";
 
-export class Animation {
+export interface Animation {
     /* @param number - The number of milliseconds an animation takes. */
-    duration: number = 1000;
+    duration: number;
     /* @param easing - Descriptions inside the type. */
-    easing: Easing = Easing.easeOutBack;
+    easing: Easing;
     /* @param animation - If true, the chart will animate in with a rotation animation. */
-    animateRotate: boolean = false;
+    animateRotate: boolean;
     /* @param animation - If true, will animate scaling the chart from the center outwards. */
-    animateScale: boolean = false;
+    animateScale: boolean;
 }

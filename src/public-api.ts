@@ -4,25 +4,26 @@
 
 export * from './lib/graphs.module';
 
+export * from './lib/services/graph.service';
+
 export * from './lib/graphs.component';
 export * from './lib/components/pie-graph/pie-graph.component';
 
-export * from './lib/models/inputs/config/PieGraphConfig.model';
-export * from './lib/models/inputs/config/BaseConfig.model';
+export * from './lib/interfaces/config/PieGraphConfig.model';
 
-export * from './lib/models/inputs/config/general/Animation.model';
-export * from './lib/models/inputs/config/general/Layout.model';
-export * from './lib/models/inputs/config/general/Legend.model';
-export * from './lib/models/inputs/config/general/Responsive.model';
-export * from './lib/models/inputs/config/general/Title.model';
-export * from './lib/models/inputs/config/general/Tooltip.model';
+export * from './lib/interfaces/config/general/Animation.model';
+export * from './lib/interfaces/config/general/Layout.model';
+export * from './lib/interfaces/config/general/Legend.model';
+export * from './lib/interfaces/config/general/Responsive.model';
+export * from './lib/interfaces/config/general/Title.model';
+export * from './lib/interfaces/config/general/Tooltip.model';
 
-export * from './lib/models/inputs/config/general/shared/LegendLabel.model';
-export * from './lib/models/inputs/config/general/shared/Padding.model';
+export * from './lib/interfaces/config/general/shared/LegendLabel.model';
+export * from './lib/interfaces/config/general/shared/Padding.model';
 
-export * from './lib/models/inputs/data/BaseData.model';
-export * from './lib/models/inputs/data/core/NameNestedValue.model';
-export * from './lib/models/inputs/data/core/NameValue.model';
+export * from './lib/interfaces/data/BaseData.model';
+export * from './lib/interfaces/data/NameNestedValue.model';
+export * from './lib/interfaces/data/NameValue.model';
 
 export * from './lib/models/inputs/enum/Align.enum';
 export * from './lib/models/inputs/enum/BorderAlign.enum';

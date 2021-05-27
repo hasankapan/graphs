@@ -1,18 +1,17 @@
-import { FontStyle } from "../../../enum/FontStyle.enum";
+import { FontStyle } from "../../../../models/inputs/enum/FontStyle.enum";
 
-export class LegendLabel {
-
+export interface LegendLabel {
     /* @param boxWidth - Width of coloured box. */
-    boxWidth: number = 30;
+    boxWidth: number;
     /* @param fontSize - Font size of text. */
-    fontSize: number = 12;
+    fontSize: number;
     /* @param fontStyle - Font style of text. */
-    fontStyle: FontStyle = FontStyle.NORMAL;
+    fontStyle: FontStyle;
     /* @param fontColor - Color of text. */
-    fontColor: string = '#666';
+    fontColor: string;
     /* @param fontFamily - Font family of legend text. */
-    fontFamily: string = 'system-ui';
+    fontFamily: string;
     /* @param padding - Padding between rows of colored boxes. */
-    padding: number = 10;
+    padding: number;
 
 }
