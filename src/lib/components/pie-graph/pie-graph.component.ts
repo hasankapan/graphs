@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { Messages } from '../../Ngss.message';
+import { Messages } from '../../Message.ngss';
 import { StatusMessage } from '../../models/calls/StatusMessage.model';
 import { NameValue } from '../../interfaces/data/NameValue.model';
 import { PieGraphConfig } from '../../interfaces/config/PieGraphConfig.model';
@@ -56,11 +56,9 @@ export class PieGraphComponent implements OnInit {
             borderAlign: config.borderAlign,
             borderColor: config.borderColor,
             borderWidth: config.borderWidth,
-
             hoverBackgroundColor: config.hoverBackgroundColor,
             hoverBorderColor: config.hoverBorderColor,
             hoverBorderWidth: config.hoverBorderWidth,
-
             weight: config.weight
           }
         ]
@@ -119,7 +117,7 @@ export class PieGraphComponent implements OnInit {
             that.selectedContextEmitter(_value);
           }
           catch {
-            
+
           }
         }
       }
