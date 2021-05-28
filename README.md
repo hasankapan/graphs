@@ -12,8 +12,11 @@ ngss-graphs is a angular library for easily create charts.
   },
 ```
 
+/*for chart-js & charjs-plugin*/
 ```bash
-npm install &
+npm install 
+```
+```bash
 npm install ngss-graphs
 ```
 ## Configurations
@@ -39,41 +42,58 @@ imports: [
 ```ts
 import { GraphService, NameValue, PieGraphConfig } from 'ngss-graphs';
 
+export class AppComponent implements OnInit{
 
+  data:NameValue[] = [];
+  config:PieGraphConfig;
 
-/*properties*/
-data:NameValue[];
-config:PieGraphConfig;
+  constructor(private graphService:GraphService) { }
 
+  ngOnInit(): void {
+    let euler:NameValue = {
+      name:"euler",
+      value: 150
+    }
+    let gauss:NameValue = {
+        name:"gauss",
+        value: 254
+    }
+    let tesla:NameValue = {
+        name:"tesla",
+        value: 400
+    }
 
-let euler:NameValue = {
-    name:"euler",
-    value: 150
-}
-let gauss:NameValue = {
-    name:"gauss",
-    value: 254
-}
-let tesla:NameValue = {
-    name:"tesla",
-    value: 400
-}
+    this.data.push(euler)
+    this.data.push(gauss)
+    this.data.push(tesla)
 
-this.data.push(euler)
-this.data.push(gauss)
-this.data.push(tesla)
+    let pieConfigDefaults:PieGraphConfig = this.graphService.getDefaultPieConfig();
 
-let pieConfigDefaults:PieGraphConfig = this.graphService.getDefaultPieConfig();
+    pieConfigDefaults.tooltip.enabled = false;
+    pieConfigDefaults.hoverBackgroundColor = undefined;
+    pieConfigDefaults.hoverBorderColor = 'white';
+    pieConfigDefaults.hoverBorderWidth = 2;
+    pieConfigDefaults.cutoutPercentage = 0;
+    pieConfigDefaults.borderWidth = .5;
 
-/* you can change everything you want in pieConfigDefaults instance */
+    pieConfigDefaults.tooltip.caretSize = 2;
+    pieConfigDefaults.tooltip.caretPadding = 0;
 
-pieConfigDefaults.title.display = true;
-pieConfigDefaults.title.text = "Custom";
+    pieConfigDefaults.dataLabel.display = true;
+    pieConfigDefaults.dataLabel.anchor = Anchor.CENTER
+    pieConfigDefaults.dataLabel.backgroundColor = 'white';
+    pieConfigDefaults.dataLabel.padding = 0;
+    pieConfigDefaults.dataLabel.borderRadius = 10;
+    pieConfigDefaults.dataLabel.borderWidth = .3;
+    pieConfigDefaults.dataLabel.borderColor = 'white' 
 
-this.config = pieConfigDefaults
+    this.config = pieConfigDefaults;
 
-getLabel(event:string) {
-    console.log('clicked label : ' + event)
+  }
+
+  doSome(e:string){
+    console.log(e);
+  }
 }
 ```
 
