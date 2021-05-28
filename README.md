@@ -91,7 +91,7 @@ export class AppComponent implements OnInit{
 
   }
 
-  doSome(e:string){
+  getLabel(e:string){
     console.log(e);
   }
 }
