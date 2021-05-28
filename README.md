@@ -1,16 +1,45 @@
 # ngss-graphs
+
+ngss-graphs is a angular library for easily create charts.
  
-# Get Started
-npm -i ngss-graphs
+## Installation
+#### package.json
+```json
+"dependencies": {
+    ...
+    "chart.js": "^2.9.4",
+    "chartjs-plugin-datalabels": "^1.0.0",
+  },
+```
 
-# Configurations
-You can read README. in docs folder.
+```bash
+npm install &
+npm install ngss-graphs
+```
+## Configurations
+You can read README file for more chart configuration information [docs](https://github.com/hasankapan/graphs/blob/main/docs/modules.md)
 
-# Sample
-in *component.html
+## Sample
+#### in *module
+```ts
+import { GraphsModule } from 'ngss-graphs';
+
+
+imports: [
+    ...
+    GraphsModule
+  ],
+```
+
+#### in *component.html
+```html
 <ngss-pie-graph [data]='data' [config]='config' (clickPiece)="getLabel($event)"></ngss-pie-graph>
+```
+#### in *component.ts
+```ts
+import { GraphService, NameValue, PieGraphConfig } from 'ngss-graphs';
 
-in *component.ts
+
 
 /*properties*/
 data:NameValue[];
@@ -30,9 +59,9 @@ let tesla:NameValue = {
     value: 400
 }
 
-data.push(euler)
-data.push(gauss)
-data.push(tesla)
+this.data.push(euler)
+this.data.push(gauss)
+this.data.push(tesla)
 
 let pieConfigDefaults:PieGraphConfig = this.graphService.getDefaultPieConfig();
 
@@ -41,8 +70,12 @@ let pieConfigDefaults:PieGraphConfig = this.graphService.getDefaultPieConfig();
 pieConfigDefaults.title.display = true;
 pieConfigDefaults.title.text = "Custom";
 
-config = pieConfigDefaults
+this.config = pieConfigDefaults
 
 getLabel(event:string) {
     console.log('clicked label : ' + event)
 }
+```
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
