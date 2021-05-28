@@ -1,9 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Messages } from '../../Message.ngss';
 import { StatusMessage } from '../../models/calls/StatusMessage.model';
-import { NameValue } from '../../interfaces/data/NameValue.model';
-import { PieGraphConfig } from '../../interfaces/config/PieGraphConfig.model';
+import { NameValue } from '../../interfaces/data/NameValue.interface';
+import { PieGraphConfig } from '../../interfaces/config/PieGraphConfig.interface';
 import { PieGraphConfigImpl } from '../../models/inputs/config/PieGraphConfigImpl.model';
 import { merge } from 'lodash';
 
@@ -30,11 +31,11 @@ export class PieGraphComponent implements OnInit {
     this.prepare(this.data, this.config);
   }
 
-  selectedContextEmitter(value) {
+  selectedContextEmitter(value:string) {
     this.clickPiece.emit(value);
   }
 
-  prepare(data: NameValue[], config: PieGraphConfig) {
+  prepare(data: NameValue[] | undefined, config: PieGraphConfig | undefined) {
     console.log(config);
 
     /* first, default settings are created, then they are combined with the values that come as parameters. */
@@ -47,6 +48,7 @@ export class PieGraphComponent implements OnInit {
   createPieChart(data: NameValue[], config: PieGraphConfig) {
     let that = this;
     this.chart = new Chart(this.graphCanvas.nativeElement, {
+      plugins:[ChartDataLabels],
       type: 'pie',
       data: {
         datasets: [
@@ -68,16 +70,74 @@ export class PieGraphComponent implements OnInit {
         responsiveAnimationDuration: config.responsive.responsiveAnimationDuration,
         maintainAspectRatio: config.responsive.maintainAspectRatio,
         aspectRatio: config.responsive.aspectRatio,
+        plugins: {
+          datalabels: {
+            display: config.dataLabel.display,
+            align: config.dataLabel.align,
+            anchor: config.dataLabel.anchor,
+            backgroundColor: config.dataLabel.backgroundColor,
+            borderColor: config.dataLabel.borderColor,
+            borderRadius: config.dataLabel.borderRadius,
+            borderWidth: config.dataLabel.borderWidth,
+            clamp: config.dataLabel.clamp,
+            clip: config.dataLabel.clip,
+            color: config.dataLabel.color,
+            font: {
+              family: config.dataLabel.font.family,
+              size: config.dataLabel.font.size,
+              style: config.dataLabel.font.style,
+              weight: config.dataLabel.font.weight,
+              lineHeight: config.dataLabel.font.lineHeight
+            },
+            offset: config.dataLabel.offset,
+            opacity: config.dataLabel.opacity,
+            padding: config.dataLabel.padding,
+            rotation: config.dataLabel.rotation,
+            textAlign: config.dataLabel.textAlign
+        }
+      },
         tooltips: {
           enabled: config.tooltip.enabled,
-          intersect: config.tooltip.intersect,
           mode: config.tooltip.mode,
+          intersect: config.tooltip.intersect,
+          backgroundColor: config.tooltip.backgroundColor,
+          titleAlign: config.tooltip.titleAlign,
+          titleFontFamily: config.tooltip.titleFontFamily,
+          titleFontSize: config.tooltip.titleFontSize,
+          titleFontStyle: config.tooltip.titleFontStyle,
+          titleFontColor: config.tooltip.titleFontColor,
+          titleSpacing: config.tooltip.titleSpacing,
+          titleMarginBottom: config.tooltip.titleMarginBottom,
+          bodyAlign: config.tooltip.bodyAlign,
+          bodyFontFamily: config.tooltip.bodyFontFamily,
+          bodyFontSize: config.tooltip.bodyFontSize,
+          bodyFontStyle: config.tooltip.bodyFontStyle,
+          bodyFontColor: config.tooltip.bodyFontColor,
+          bodySpacing: config.tooltip.bodySpacing,
+          footerAlign: config.tooltip.footerAlign,
+          footerFontFamily: config.tooltip.footerFontFamily,
+          footerFontSize: config.tooltip.footerFontSize,
+          footerFontStyle: config.tooltip.footerFontStyle,
+          footerFontColor: config.tooltip.footerFontColor,
+          footerSpacing: config.tooltip.footerSpacing,
+          footerMarginTop: config.tooltip.footerMarginTop,
+          xPadding: config.tooltip.xPadding,
+          yPadding: config.tooltip.yPadding,
+          caretSize: config.tooltip.caretSize,
+          cornerRadius: config.tooltip.cornerRadius,
+          multiKeyBackground: config.tooltip.multiKeyBackground,
+          position: config.tooltip.position,
+          caretPadding: config.tooltip.caretPadding,
+          displayColors: config.tooltip.displayColors,
+          borderColor: config.tooltip.borderColor,
+          borderWidth: config.tooltip.borderWidth,
+          rtl: config.tooltip.rtl,
         },
         animation: {
           duration: config.animation.duration,
           easing: config.animation.easing,
-          animationRotate: config.animation.animateRotate,
-          animationScale: config.animation.animateScale
+          animateRotate: config.animation.animateRotate,
+          animateScale: config.animation.animateScale
         },
         legend: {
           display: config.legend.display,
@@ -110,10 +170,10 @@ export class PieGraphComponent implements OnInit {
         rotation: config.rotation,
         cutoutPercentage: config.cutoutPercentage,
         circumference: config.circumference,
-        onClick: function myfc(c, i) {
+        onClick: function myfc(c:any, i:any) {
           try {
-            let e = i[0];
-            var _value = e._model.label
+            let e:any = i[0];
+            var _value:string = e._model.label
             that.selectedContextEmitter(_value);
           }
           catch {
@@ -129,6 +189,8 @@ export class PieGraphComponent implements OnInit {
       } else {
         this.clearCanvasFillText(Messages.EXCEPTION_WHEN("fill data"));
       }
+    }).catch((err: StatusMessage) => {
+      this.clearCanvasFillText(Messages.EXCEPTION_WHEN_AND_CAUSE("fill data", err.message));
     })
 
   }
@@ -136,21 +198,25 @@ export class PieGraphComponent implements OnInit {
   prepareData(data: NameValue[]): Promise<StatusMessage> {
     return new Promise<StatusMessage>((resolve, reject) => {
       try {
-        for (let i = 0; i < data.length; i++) {
-          this.chart.data.datasets[0].data[i] = Math.floor(data[i].value);
-          this.chart.data.labels[i] = data[i].name;
+        if (data != null) {
+          for (let i = 0; i < data.length; i++) {
+            this.chart.data.datasets[0].data[i] = Math.floor(data[i].value);
+            this.chart.data.labels[i] = data[i].name;
+          }
+          resolve(new StatusMessage(true, "data filled successfully"));
+        }else {
+          resolve(new StatusMessage(false, "data can not be null or undefined"));
         }
-        resolve(new StatusMessage(true, "data filled successfully"));
       } catch (err) {
         console.log(err);
-        resolve(new StatusMessage(false, err));
+        reject(new StatusMessage(false, err));
       }
     });
   }
 
   clearCanvasFillText(text: string) {
     Chart.plugins.register({
-      afterDraw: function (graphCanvas) {
+      afterDraw: function (graphCanvas: any) {
         if (graphCanvas.data.datasets[0].data === null || graphCanvas.data.datasets[0].data.length === 0) {
           var ctx = graphCanvas.chart.ctx;
           var width = graphCanvas.chart.width;

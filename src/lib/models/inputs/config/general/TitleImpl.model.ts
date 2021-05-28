@@ -1,4 +1,4 @@
-import { Title } from "../../../../interfaces/config/general/Title.model";
+import { Title } from "../../../../interfaces/config/general/Title.interface";
 import { FontStyle } from "../../enum/FontStyle.enum";
 import { Position } from "../../enum/Position.enum";
 

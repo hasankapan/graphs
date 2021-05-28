@@ -1,4 +1,4 @@
-import { BaseData } from "../../../interfaces/data/BaseData.model";
+import { BaseData } from "../../../interfaces/data/BaseData.interface";
 
 export class BaseDataImpl implements BaseData {
     name: string;

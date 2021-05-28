@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PieGraphConfig } from '../interfaces/config/PieGraphConfig.model';
+import { PieGraphConfig } from '../interfaces/config/PieGraphConfig.interface';
 import { PieGraphConfigImpl } from '../models/inputs/config/PieGraphConfigImpl.model';
 
 @Injectable({
@@ -14,5 +14,4 @@ export class GraphService {
     let config:PieGraphConfig = new PieGraphConfigImpl();
     return config;
   }
-
 }

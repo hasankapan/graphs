@@ -1,4 +1,4 @@
-import { LegendLabel } from "../../../../../interfaces/config/general/shared/LegendLabel.model";
+import { LegendLabel } from "../../../../../interfaces/config/general/shared/LegendLabel.interface";
 import { FontStyle } from "../../../enum/FontStyle.enum";
 
 export class LegendLabelImpl implements LegendLabel{

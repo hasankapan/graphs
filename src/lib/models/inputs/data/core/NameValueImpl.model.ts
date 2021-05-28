@@ -1,4 +1,4 @@
-import { NameValue } from "../../../../interfaces/data/NameValue.model";
+import { NameValue } from "../../../../interfaces/data/NameValue.interface";
 import { BaseDataImpl } from "../BaseDataImpl.model";
 
 export class NameValueImpl extends BaseDataImpl implements NameValue {

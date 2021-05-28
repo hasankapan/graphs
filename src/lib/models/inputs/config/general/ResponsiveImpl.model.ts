@@ -1,4 +1,4 @@
-import { Responsive } from "../../../../interfaces/config/general/Responsive.model";
+import { Responsive } from "../../../../interfaces/config/general/Responsive.interface";
 
 export class ResponsiveImpl implements Responsive {
     responsive: boolean = true;

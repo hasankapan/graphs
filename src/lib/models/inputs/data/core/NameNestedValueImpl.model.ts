@@ -1,5 +1,5 @@
-import { NameNestedValue } from "../../../../interfaces/data/NameNestedValue.model";
-import { NameValue } from "../../../../interfaces/data/NameValue.model";
+import { NameNestedValue } from "../../../../interfaces/data/NameNestedValue.interface";
+import { NameValue } from "../../../../interfaces/data/NameValue.interface";
 import { BaseDataImpl } from "../BaseDataImpl.model";
 
 export class NameNestedValueImpl extends BaseDataImpl implements NameNestedValue {

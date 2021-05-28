@@ -4,15 +4,25 @@ import { TooltipAlign } from "../../../models/inputs/enum/TooltipAlign.enum";
 import { TooltipPosition } from "../../../models/inputs/enum/TooltipPosition.enum";
 
 export interface Tooltip {
-    /* @param enabled - Are on-canvas tooltips enabled? */
+    /**
+     * @property  Are on-canvas tooltips enabled?
+     */
     enabled: boolean;
-    /* @param mode - Sets which elements appear in the tooltip. */
+    /**
+     * @property  Sets which elements appear in the tooltip.
+     */
     mode: Mode;
-    /* @param intersect - If true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times. */
+    /**
+     * @property  If true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
+     */
     intersect: boolean;
-    /* @param position - The mode for positioning the tooltip. */
+    /**
+     * @property  The mode for positioning the tooltip.
+     */
     position: TooltipPosition;
-    /* @param Background color of the tooltip. */
+    /**
+     * @property  Background color of the tooltip. 
+     */
     backgroundColor: string;
     /* @param Title styling */
     titleFontFamily: string;
@@ -37,23 +47,38 @@ export interface Tooltip {
     footerAlign: TooltipAlign;
     footerSpacing: number;
     footerMarginTop: number;
-    /* @param Padding to add on left and right of tooltip. */
+    /**
+     * @property  Padding to add on left and right of tooltip.
+     */
     xPadding: number;
-    /* @param Padding to add on top and bottom of tooltip. */
+    /**
+     * @property  Padding to add on top and bottom of tooltip.
+     */
     yPadding: number;
-    /* @param Extra distance to move the end of the tooltip arrow away from the tooltip point. */
+    /**
+     * @property  Extra distance to move the end of the tooltip arrow away from the tooltip point.
+     */
     caretPadding: number;
-    /* @param Size, in px, of the tooltip arrow. */
+    /**
+     * @property  Size, in px, of the tooltip arrow.
+     */
     caretSize: number;
-    /* @param Radius of tooltip corner curves. */
+    /**
+     * @property  Radius of tooltip corner curves.
+     */
     cornerRadius: number;
-    /* @param Color to draw behind the colored boxes when multiple items are in the tooltip. */
+    /**
+     * @property  Color to draw behind the colored boxes when multiple items are in the tooltip.
+     */
     multiKeyBackground: string;
-    /* @param If true, color boxes are shown in the tooltip. */
+    /**
+     * @property  If true, color boxes are shown in the tooltip.
+     */
     displayColors: boolean;
-    /* @param Border styling */
     borderColor: string;
     borderWidth: number;
-    /* @param true for rendering the legends from right to left. */
+    /**
+     * @property  true for rendering the legends from right to left.
+     */
     rtl: boolean;
 }

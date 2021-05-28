@@ -1,5 +1,5 @@
-import { Legend } from "../../../../interfaces/config/general/Legend.model";
-import { LegendLabel } from "../../../../interfaces/config/general/shared/LegendLabel.model";
+import { Legend } from "../../../../interfaces/config/general/Legend.interface";
+import { LegendLabel } from "../../../../interfaces/config/general/shared/LegendLabel.interface";
 import { Align } from "../../enum/Align.enum";
 import { Position } from "../../enum/Position.enum";
 import { LegendLabelImpl } from "./shared/LegendLabelImpl.model";

@@ -5,7 +5,8 @@
     "@angular/common": "^11.2.13",
     "@angular/core": "^11.2.13",
     "chart.js": "^2.9.4",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "chartjs-plugin-datalabels": "^1.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
