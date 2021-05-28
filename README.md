@@ -96,6 +96,7 @@ export class AppComponent implements OnInit{
   }
 }
 ```
+![alt text](https://github.com/hasankapan/graphs/blob/main/samples/sample.png?raw=true)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
