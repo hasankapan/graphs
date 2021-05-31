@@ -10,11 +10,11 @@ export interface Legend {
     /**
      * @property  Position of the legend. 
      */
-    position: Position;
+    position: 'top' | 'left' | 'bottom' | 'right' | Position;
     /**
      * @property  Alignment of the legend.
      */
-    align: Align;
+    align: 'start' | 'center' | 'end' | Align;
     /**
      * @property  Marks that this box should take the full width of the canvas (pushing down other boxes). 
      * This is unlikely to need to be changed in day-to-day use.

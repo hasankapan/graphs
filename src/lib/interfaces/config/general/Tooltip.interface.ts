@@ -24,6 +24,7 @@ export interface Tooltip {
      * @property  Background color of the tooltip. 
      */
     backgroundColor: string;
+
     /* @param Title styling */
     titleFontFamily: string;
     titleFontSize: number;
@@ -32,6 +33,7 @@ export interface Tooltip {
     titleAlign: TooltipAlign;
     titleSpacing: number;
     titleMarginBottom: number;
+
     /* @param Body styling */
     bodyFontFamily: string;
     bodyFontSize: number;
@@ -39,6 +41,7 @@ export interface Tooltip {
     bodyFontColor: string;
     bodyAlign: TooltipAlign;
     bodySpacing: number;
+
     /* @param Footer styling */
     footerFontFamily: string;
     footerFontSize: number;
@@ -75,7 +78,13 @@ export interface Tooltip {
      * @property  If true, color boxes are shown in the tooltip.
      */
     displayColors: boolean;
+    /**
+     * @property tooltip box border color property.
+     */
     borderColor: string;
+    /**
+     * @property tooltip box border width property.
+     */
     borderWidth: number;
     /**
      * @property  true for rendering the legends from right to left.

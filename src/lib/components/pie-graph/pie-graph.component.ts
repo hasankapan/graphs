@@ -31,7 +31,7 @@ export class PieGraphComponent implements OnInit {
     this.prepare(this.data, this.config);
   }
 
-  selectedContextEmitter(value:string) {
+  selectedContextEmitter(value: string) {
     this.clickPiece.emit(value);
   }
 
@@ -48,7 +48,7 @@ export class PieGraphComponent implements OnInit {
   createPieChart(data: NameValue[], config: PieGraphConfig) {
     let that = this;
     this.chart = new Chart(this.graphCanvas.nativeElement, {
-      plugins:[ChartDataLabels],
+      plugins: [ChartDataLabels],
       type: 'pie',
       data: {
         datasets: [
@@ -94,8 +94,8 @@ export class PieGraphComponent implements OnInit {
             padding: config.dataLabel.padding,
             rotation: config.dataLabel.rotation,
             textAlign: config.dataLabel.textAlign
-        }
-      },
+          }
+        },
         tooltips: {
           enabled: config.tooltip.enabled,
           mode: config.tooltip.mode,
@@ -170,14 +170,14 @@ export class PieGraphComponent implements OnInit {
         rotation: config.rotation,
         cutoutPercentage: config.cutoutPercentage,
         circumference: config.circumference,
-        onClick: function myfc(c:any, i:any) {
+        onClick: function click(c: any, i: any) {
           try {
-            let e:any = i[0];
-            var _value:string = e._model.label
+            let e: any = i[0];
+            var _value: string = e._model.label
             that.selectedContextEmitter(_value);
           }
-          catch {
-
+          catch (err) {
+            console.log(err);
           }
         }
       }
@@ -204,7 +204,7 @@ export class PieGraphComponent implements OnInit {
             this.chart.data.labels[i] = data[i].name;
           }
           resolve(new StatusMessage(true, "data filled successfully"));
-        }else {
+        } else {
           resolve(new StatusMessage(false, "data can not be null or undefined"));
         }
       } catch (err) {

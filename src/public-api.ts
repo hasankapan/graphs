@@ -12,14 +12,21 @@ export * from './lib/components/pie-graph/pie-graph.component';
 export * from './lib/interfaces/config/PieGraphConfig.interface';
 
 export * from './lib/interfaces/config/general/Animation.interface';
+export * from './lib/interfaces/config/general/Axes.interface';
+export * from './lib/interfaces/config/general/DataLabel.interface';
 export * from './lib/interfaces/config/general/Layout.interface';
 export * from './lib/interfaces/config/general/Legend.interface';
 export * from './lib/interfaces/config/general/Responsive.interface';
 export * from './lib/interfaces/config/general/Title.interface';
 export * from './lib/interfaces/config/general/Tooltip.interface';
 
+export * from './lib/interfaces/config/general/shared/Common.axes.interface';
+export * from './lib/interfaces/config/general/shared/GridLine.interface';
 export * from './lib/interfaces/config/general/shared/LegendLabel.interface';
 export * from './lib/interfaces/config/general/shared/Padding.interface';
+export * from './lib/interfaces/config/general/shared/ScaleLabel.interface';
+export * from './lib/interfaces/config/general/shared/Style.interface';
+export * from './lib/interfaces/config/general/shared/Ticks.interface';
 
 export * from './lib/interfaces/data/BaseData.interface';
 export * from './lib/interfaces/data/NameNestedValue.interface';

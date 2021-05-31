@@ -1,5 +1,6 @@
 import { BorderAlign } from "../../models/inputs/enum/BorderAlign.enum";
 import { Animation } from "./general/Animation.interface";
+import { Axes } from "./general/Axes.interface";
 import { DataLabel } from "./general/DataLabel.interface";
 import { Layout } from "./general/Layout.interface";
 import { Legend } from "./general/Legend.interface";
@@ -75,4 +76,6 @@ export interface PieGraphConfig{
     title: Title;
     tooltip: Tooltip;
     dataLabel: DataLabel;
+    xAxis: Axes;
+    yAxis: Axes;
 }
