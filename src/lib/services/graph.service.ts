@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PieGraphConfig } from '../interfaces/config/PieGraphConfig.interface';
-import { PieGraphConfigImpl } from '../models/inputs/config/PieGraphConfigImpl.model';
+import { NGChart } from '../interfaces/index/NGChart.namespace';
+import { NGChartDefaults } from '../models/index/NGChartDefaults.namespace';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,7 @@ export class GraphService {
   constructor() { }
 
   //it will be factory
-  getDefaultPieConfig() :PieGraphConfig{
-    let config:PieGraphConfig = new PieGraphConfigImpl();
-    return config;
+  getDefaultPieConfig() :NGChart.ChartOptions{
+    return new NGChartDefaults.PieChartOptions();
   }
 }

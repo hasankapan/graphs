@@ -9,6 +9,9 @@ export * from './lib/services/graph.service';
 export * from './lib/graphs.component';
 export * from './lib/components/pie-graph/pie-graph.component';
 
+export * from './lib/interfaces/index/NGChart.namespace';
+export * from './lib/models/index/NGChartDefaults.namespace';
+
 export * from './lib/interfaces/config/PieGraphConfig.interface';
 
 export * from './lib/interfaces/config/general/Animation.interface';

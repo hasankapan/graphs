@@ -4,9 +4,10 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Messages } from '../../Message.ngss';
 import { StatusMessage } from '../../models/calls/StatusMessage.model';
 import { NameValue } from '../../interfaces/data/NameValue.interface';
-import { PieGraphConfig } from '../../interfaces/config/PieGraphConfig.interface';
-import { PieGraphConfigImpl } from '../../models/inputs/config/PieGraphConfigImpl.model';
 import { merge } from 'lodash';
+import { NGChart } from '../../interfaces/index/NGChart.namespace';
+import { NGChartDefaults } from '../../models/index/NGChartDefaults.namespace';
+import { GraphService } from '../../services/graph.service';
 
 @Component({
   selector: 'ngss-pie-graph',
@@ -19,13 +20,13 @@ export class PieGraphComponent implements OnInit {
   /* @input data to fill the chart, when it is blank, clear the canvas and write a message */
   @Input() data?: NameValue[];
   /* @input object to customize the chart, use default values when blank */
-  @Input() config?: PieGraphConfig;
+  @Input() config?: NGChartDefaults.PieChartOptions;
   /* @output returns the label value of the clicked piece */
   @Output() clickPiece = new EventEmitter<string>();
   /* graphic dom element */
   @ViewChild('graphCanvas', { static: true }) graphCanvas: ElementRef;
 
-  constructor() { }
+  constructor(private graphService: GraphService) { }
 
   ngOnInit() {
     this.prepare(this.data, this.config);
@@ -35,17 +36,15 @@ export class PieGraphComponent implements OnInit {
     this.clickPiece.emit(value);
   }
 
-  prepare(data: NameValue[] | undefined, config: PieGraphConfig | undefined) {
-    console.log(config);
+  prepare(data: NameValue[] | undefined, config: NGChart.ChartOptions | undefined) {
 
     /* first, default settings are created, then they are combined with the values that come as parameters. */
-    let mergedConfig: PieGraphConfig = merge(new PieGraphConfigImpl(), config)
-    console.log(mergedConfig);
+    let mergedConfig: NGChart.ChartOptions = merge(this.graphService, config);
 
     (data == null) ? this.clearCanvasFillText(Messages.NO_DATA) : this.createPieChart(data, mergedConfig);
   }
 
-  createPieChart(data: NameValue[], config: PieGraphConfig) {
+  createPieChart(data: NameValue[], config: NGChart.ChartOptions) {
     let that = this;
     this.chart = new Chart(this.graphCanvas.nativeElement, {
       plugins: [ChartDataLabels],
@@ -53,119 +52,68 @@ export class PieGraphComponent implements OnInit {
       data: {
         datasets: [
           {
-            data: [],
-            backgroundColor: config.backgroundColor,
-            borderAlign: config.borderAlign,
-            borderColor: config.borderColor,
-            borderWidth: config.borderWidth,
-            hoverBackgroundColor: config.hoverBackgroundColor,
-            hoverBorderColor: config.hoverBorderColor,
-            hoverBorderWidth: config.hoverBorderWidth,
-            weight: config.weight
+            data:[], 
+            backgroundColor:config.dataset.backgroundColor, 
+            barPercentage:config.dataset.barPercentage, 
+            barThickness:config.dataset.barThickness, 
+            borderAlign:config.dataset.borderAlign, 
+            borderWidth:config.dataset.borderWidth, 
+            borderColor:config.dataset.borderColor, 
+            borderCapStyle:config.dataset.borderCapStyle, 
+            borderDash:config.dataset.borderDash, 
+            borderDashOffset:config.dataset.borderDashOffset, 
+            borderJoinStyle:config.dataset.borderJoinStyle, 
+            borderSkipped:config.dataset.borderSkipped, 
+            categoryPercentage:config.dataset.categoryPercentage, 
+            fill:config.dataset.fill, 
+            hitRadius:config.dataset.hitRadius, 
+            hoverBackgroundColor:config.dataset.hoverBackgroundColor, 
+            hoverBorderColor:config.dataset.hoverBorderColor, 
+            hoverBorderWidth:config.dataset.hoverBorderWidth, 
+            hoverRadius:config.dataset.hoverRadius, 
+            label:config.dataset.label, 
+            lineTension:config.dataset.lineTension, 
+            maxBarThickness:config.dataset.maxBarThickness, 
+            minBarLength:config.dataset.minBarLength, 
+            steppedLine:config.dataset.steppedLine, 
+            order:config.dataset.order, 
+            pointBorderColor:config.dataset.pointBorderColor, 
+            pointBackgroundColor:config.dataset.pointBackgroundColor, 
+            pointBorderWidth:config.dataset.pointBorderWidth, 
+            pointRadius:config.dataset.pointRadius, 
+            pointRotation:config.dataset.pointRotation, 
+            pointHoverRadius:config.dataset.pointHoverRadius, 
+            pointHitRadius:config.dataset.pointHitRadius, 
+            pointHoverBackgroundColor:config.dataset.pointHoverBackgroundColor, 
+            pointHoverBorderColor:config.dataset.pointHoverBorderColor, 
+            pointHoverBorderWidth:config.dataset.pointHoverBorderWidth, 
+            pointStyle:config.dataset.pointStyle, 
+            radius:config.dataset.radius, 
+            rotation:config.dataset.rotation, 
+            xAxisID:config.dataset.xAxisID, 
+            yAxisID:config.dataset.yAxisID, 
+            type:config.dataset.type, 
+            hidden:config.dataset.hidden, 
+            hideInLegendAndTooltip:config.dataset.hideInLegendAndTooltip, 
+            showLine:config.dataset.showLine, 
+            stack:config.dataset.stack, 
+            spanGaps:config.dataset.spanGaps, 
+            weight:config.dataset.weight, 
           }
         ]
       },
       options: {
-        responsive: config.responsive.responsive,
-        responsiveAnimationDuration: config.responsive.responsiveAnimationDuration,
-        maintainAspectRatio: config.responsive.maintainAspectRatio,
-        aspectRatio: config.responsive.aspectRatio,
+        responsive: config.responsive,
+        responsiveAnimationDuration: config.responsiveAnimationDuration,
+        maintainAspectRatio: config.maintainAspectRatio,
+        aspectRatio: config.aspectRatio,
         plugins: {
-          datalabels: {
-            display: config.dataLabel.display,
-            align: config.dataLabel.align,
-            anchor: config.dataLabel.anchor,
-            backgroundColor: config.dataLabel.backgroundColor,
-            borderColor: config.dataLabel.borderColor,
-            borderRadius: config.dataLabel.borderRadius,
-            borderWidth: config.dataLabel.borderWidth,
-            clamp: config.dataLabel.clamp,
-            clip: config.dataLabel.clip,
-            color: config.dataLabel.color,
-            font: {
-              family: config.dataLabel.font.family,
-              size: config.dataLabel.font.size,
-              style: config.dataLabel.font.style,
-              weight: config.dataLabel.font.weight,
-              lineHeight: config.dataLabel.font.lineHeight
-            },
-            offset: config.dataLabel.offset,
-            opacity: config.dataLabel.opacity,
-            padding: config.dataLabel.padding,
-            rotation: config.dataLabel.rotation,
-            textAlign: config.dataLabel.textAlign
-          }
+          datalabels: config.label
         },
-        tooltips: {
-          enabled: config.tooltip.enabled,
-          mode: config.tooltip.mode,
-          intersect: config.tooltip.intersect,
-          backgroundColor: config.tooltip.backgroundColor,
-          titleAlign: config.tooltip.titleAlign,
-          titleFontFamily: config.tooltip.titleFontFamily,
-          titleFontSize: config.tooltip.titleFontSize,
-          titleFontStyle: config.tooltip.titleFontStyle,
-          titleFontColor: config.tooltip.titleFontColor,
-          titleSpacing: config.tooltip.titleSpacing,
-          titleMarginBottom: config.tooltip.titleMarginBottom,
-          bodyAlign: config.tooltip.bodyAlign,
-          bodyFontFamily: config.tooltip.bodyFontFamily,
-          bodyFontSize: config.tooltip.bodyFontSize,
-          bodyFontStyle: config.tooltip.bodyFontStyle,
-          bodyFontColor: config.tooltip.bodyFontColor,
-          bodySpacing: config.tooltip.bodySpacing,
-          footerAlign: config.tooltip.footerAlign,
-          footerFontFamily: config.tooltip.footerFontFamily,
-          footerFontSize: config.tooltip.footerFontSize,
-          footerFontStyle: config.tooltip.footerFontStyle,
-          footerFontColor: config.tooltip.footerFontColor,
-          footerSpacing: config.tooltip.footerSpacing,
-          footerMarginTop: config.tooltip.footerMarginTop,
-          xPadding: config.tooltip.xPadding,
-          yPadding: config.tooltip.yPadding,
-          caretSize: config.tooltip.caretSize,
-          cornerRadius: config.tooltip.cornerRadius,
-          multiKeyBackground: config.tooltip.multiKeyBackground,
-          position: config.tooltip.position,
-          caretPadding: config.tooltip.caretPadding,
-          displayColors: config.tooltip.displayColors,
-          borderColor: config.tooltip.borderColor,
-          borderWidth: config.tooltip.borderWidth,
-          rtl: config.tooltip.rtl,
-        },
-        animation: {
-          duration: config.animation.duration,
-          easing: config.animation.easing,
-          animateRotate: config.animation.animateRotate,
-          animateScale: config.animation.animateScale
-        },
-        legend: {
-          display: config.legend.display,
-          position: config.legend.position,
-          align: config.legend.align,
-          fullWidth: config.legend.fullWidth,
-          reverse: config.legend.reverse,
-          rtl: config.legend.rtl,
-          labels: {
-            boxWidth: config.legend.labels.boxWidth,
-            fontSize: config.legend.labels.fontSize,
-            fontStyle: config.legend.labels.fontStyle,
-            fontColor: config.legend.labels.fontColor,
-            fontFamily: config.legend.labels.fontFamily,
-            padding: config.legend.labels.padding
-          }
-        },
-        title: {
-          display: config.title.display,
-          text: config.title.text,
-          position: config.title.position,
-          fontSize: config.title.fontSize,
-          fontFamily: config.title.fontFamily,
-          fontColor: config.title.fontColor,
-          fontStyle: config.title.fontStyle,
-          padding: config.title.padding,
-          lineHeight: config.title.lineHeight
-        },
+        tooltips: config.tooltips,
+        animation: config.animation,
+        legend: config.legend,
+        title: config.title,
         layout: config.layout,
         rotation: config.rotation,
         cutoutPercentage: config.cutoutPercentage,
